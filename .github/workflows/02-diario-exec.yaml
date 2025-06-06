@@ -1,7 +1,9 @@
 name: "Execução Manual"
 on:
   workflow_dispatch:
-  
+  schedule:
+    - cron: "0 20 * * *"
+
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
@@ -10,12 +12,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: latest
-          
+
       - name: Instando yarn
         run: npm install -g yarn
-      
+
+      - name: Instando dependencias
+        run: yarn
+
       - name: Instalando dependencias
         run: yarn playwright install
-      
+
       - name: Executando testes e2e
         run: yarn run e2e
