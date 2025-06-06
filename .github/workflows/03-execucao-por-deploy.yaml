@@ -9,7 +9,7 @@ name: "Execução após o deploy"
 
 on:
   workflow_run:
-    workflows: ["Execução diária"]
+    workflows: ["Execução Manual"]
     types:
       - completed
 
