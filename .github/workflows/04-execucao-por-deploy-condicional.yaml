@@ -9,13 +9,16 @@ name: "Execução após o deploy"
 
 on:
   workflow_run:
-    workflows: ["Execução diária"]
+    workflows: ["Execução Manual"]
     types:
       - completed
 
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -33,3 +36,9 @@ jobs:
 
       - name: Executando testes e2e
         run: yarn run e2e
+
+      - uses: actions/upload-artifact@v4
+        if: ${{!cancelled()}}
+        with:
+          name: e2e-test-results
+          paths: ./playwright-report
