@@ -1,6 +1,6 @@
 # CI de Nível 03 - Disparo após o deploy
 
-name: "Execução após o deploy"
+name: "Execução após o deploy - artefatos"
 
 # Regras de disparo
 # workflow_dispatch permite que este workflow seja acionado manualmente.
